@@ -60,3 +60,21 @@ Inference
 FAISS(오픈 소스 라이브러리로, dense 벡터의 유사도 검색 및 군집화)를 사용
 
 #### 3.2 train
+
+손실함수를 positive sample 을 잘 맞추도록, negative samples를 잘 못맞추도록 설정(? 확인 필요)
+
+positive and negative samples
+positive sample은 자명하지만, negative sample은 어떻게 선정해야할지
+3가지 방법 제시
+1. 랜덤
+2. BM25 : BM25를 통해 반환된 top passage 중 답을 포함하지 않지만 많은 질문 토큰은 일치하는 passage
+3. Gold : training set에서 다른 질문과도 possitive passage pair를 이루는 passage
+
+best model은 negative sampling에 Gold와 BM25적용
+
+In-batch negatives
+
+크기 B인 배치에서 1개의 positive passage와 B-1개의 negative passages를 얻을 수 있다.
+
+
+### 4. Experimental setup
