@@ -78,3 +78,83 @@ In-batch negatives
 
 
 ### 4. Experimental setup
+#### 4.1 위키피디아 데이터 전처리
+반정형 데이터(표, 정보상자, 리스트) 제거
+#### 4.2 Question Answering Datasets
+1. Natural Questions(NQ)
+2. TriviaQa
+3. WebQuestions(WQ)
+4. CuratedTREC(TREC)
+5. SQuAD v1.1
+
+positive passage 선택
+
+TREC, WQ, TriviaQA는 질문 대답쌍만이 주어지기 때문에, 정답을 포함하는 구절 중 BM25에서 가장 높은 순위를 가진 구절을 positive passage로 사용한다.
+
+
+### Experiments: Passage Retrieval
+
+#### 5.1 Main Result
+2번 표는 5가지 QA데이터 셋에서 구절점색 시스템을 비교하고 있다.(top 20, 100 accuracy)
+
+SQuAD를 제외하고는 DPR이 대체로 BM25보다 성능이 좋았다. 성능 차이는 k가 클때보다 작을 때 차이가 많이 났다.
+
+SQuAD데이터 셋에서 성능이 안좋은 이유
+
+1. 답안 작성자가 구절을 읽고 답안을 작성했다.
+2. 데이터가 약 500개의 위키피디아에서 모아졌기 때문에, 학습 예시의 분포가 상당히 편향되어 있다.
+
+#### 5.2 Abolation Study on Model Training
+
+1. Sample efficientcy 
+   - 얼마나 많은 예시가 필요한가를 확인
+   - NQ에서 1000개를 사용했을 때 이미 BM25의 성능 추월
+   - 예시가 많아질수록 검색 정확도 향상
+
+2. In-batch negative training
+    - negative passage 선택 방법 적용(random, BM25, Gold) / top-k accuracy에서 k가 20보다 크면 그렇게 성능 차이가 크게 나타나지 않는다.
+    - in-batch negative training은 새로만드는 것보다 이미 배치 내의 negative examples를 재사용하는 쉽고, 메모리 효율적인 방법이다. -> 배치사이즈가 커지면 성능이 향상된다.
+    - BM25 점수는 높지만, 답을 포함하지 않는 추가적인 '어려운' negative passages 에 대한 실험. 이 추가적이인 구절들은 같은 배치의 모든 질문에 대해 negative passage로 사용되었다. 단일 BM25 negative passage를 추가하는 것은 성능을 향상 시켰지만, 두개를 추가하는 것은 그렇게 도움이 되지 못했다.
+
+3. Impact of gold passages
+   -  Our experiments on Natural Questions show that switching to distantly-supervised passages (using the highest-ranked BM25 passage that contains the answer), has only a small impact: 1 point lower top-k accuracy for retrieval. Appendix A contains more details. ("???)
+
+4. Similarity and loss
+   - L2 Norm
+   - log likelihoo
+
+5. Cross-dataset generalization
+   - non-iid setting에서 얼마나 성능 하락이 있는지 확인
+   - 다른말로, 여전히 추가적인 fine-tunning없이 다른 데이터 셋에 적용해도 일반화 되는지 확인
+   - top-20 정확도에서 fine-tunned된 베스트 모델보다 3-5포인트 로스, BM25보다는 훨씬 좋은 성능을 보였다.
+
+#### 5.3 Qualitatibe Analysis
+일반적으로 DPR이 BM25 보다 성능이 좋지만, 검색된 결과는 질적으로 다르다.
+BM25(용어기반 매칭 방법)은 키워드나 구절에 매우 민감한 반면, DPR은 어휘적 변화나 의미적 관계를 더 잘 포착한다.
+
+#### 5.4 Run-time Efficiency
+-----------------------
+-----------------
+
+### 6 Experiments: Question Answering
+#### 6.1 End-to-end QA system
+검색기 외에도 질문에 대한 답을 출력하는 판독기 신경망으로 구성.
+구절 선택 모델은 질문과 구절의 cross-attention을 통해 재정렬 역할을 한다. cross-attention은 큰 구절에서는 분해 불가능한 특성 때문에 실현 가능하지 않지만, 그것은 듀얼 인코더 모델보다 능력이 좋다.(?)
+
+#### 6.2 Result
+SQuAD 데이터를 제외하고는 QA 결과가 더 좋게 나왔다.
+NQ, TriviaQA와 같은 큰 데이터셋은 multiple datasets를 사용하여 훈련한 모델과 단독 데이터를 사용하여 훈련한 모델이 결과가 비슷했다.
+상대적으로 작은 데이터셋(WQ, TREC)은 multiple datasets를 이용하여 훈련한 결과가 확실히 좋았다.
+전반적으로 DPR-based 모델은 이전의 sota모델보다 성능이 좋았다.(5 중 4)
+
+### 7 Related Work
+---------
+### 8 Conclusion
+잠재적으로 Dense retrieval이 전통적인 sparse retrieval을 대체할 수 있을 것이라고 설명했다.
+간단한 듀얼 인코더 접근은 놀랍게도 잘 작동하였지만, 우리는 dense retriever를 성공적으로 학습시키는데 중요한 요소가 있다는 것을 보여줬다(?)
+복잡한 모델 구조나 유사도 함수가 추가적인 가치를 주는 것은 아니라는것을 보여줬다.
+
+
+
+
+
