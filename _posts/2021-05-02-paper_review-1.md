@@ -104,7 +104,7 @@ SQuAD데이터 셋에서 성능이 안좋은 이유
 1. 답안 작성자가 구절을 읽고 답안을 작성했다.
 2. 데이터가 약 500개의 위키피디아에서 모아졌기 때문에, 학습 예시의 분포가 상당히 편향되어 있다.
 
-#### 5.2 Abolation Study on Model Training
+#### 5.2 Ablation Study on Model Training
 
 1. Sample efficientcy 
    - 얼마나 많은 예시가 필요한가를 확인
