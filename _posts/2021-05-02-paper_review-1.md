@@ -118,10 +118,11 @@ SQuAD데이터 셋에서 성능이 안좋은 이유
 
 3. Impact of gold passages
    -  Our experiments on Natural Questions show that switching to distantly-supervised passages (using the highest-ranked BM25 passage that contains the answer), has only a small impact: 1 point lower top-k accuracy for retrieval. Appendix A contains more details. ("???)
+   -  
 
 4. Similarity and loss
-   - L2 Norm
-   - log likelihoo
+   - L2 Norm, dot product
+   - log likelihood
 
 5. Cross-dataset generalization
    - non-iid setting에서 얼마나 성능 하락이 있는지 확인
@@ -158,3 +159,4 @@ NQ, TriviaQA와 같은 큰 데이터셋은 multiple datasets를 사용하여 훈
 
 
 
+참고 : https://www.facebook.com/111809756917564/posts/276190540479484/
