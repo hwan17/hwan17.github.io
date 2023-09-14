@@ -37,12 +37,12 @@ disqus_shortname:   name
   #ad-client:
   #ad-slot:
 #bing-verify:
-email:              hwan17kim@gmail.com
+email:              'hwan17.kim@gmail.com'
 # twitter:            username
 #facebook:           username
 github-url:         'hwan17'
 # stackoverflow:     123456/username   from a "http://stackoverflow.com/users/123456/username" link
-linkedin:          hwan17
+linkedin:          'hwan17'
 # xing:              username
 # instagram:          username
 #lastfm:            username
