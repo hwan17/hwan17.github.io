@@ -37,24 +37,24 @@ disqus_shortname:   name
   #ad-client:
   #ad-slot:
 #bing-verify:
-#email:              asdaw
-twitter:            username
+email:              hwan17kim@gmail.com
+# twitter:            username
 #facebook:           username
 github-url:         'hwan17'
-stackoverflow:     123456/username   from a "http://stackoverflow.com/users/123456/username" link
-linkedin:          username
-xing:              username
-instagram:          username
+# stackoverflow:     123456/username   from a "http://stackoverflow.com/users/123456/username" link
+linkedin:          hwan17
+# xing:              username
+# instagram:          username
 #lastfm:            username
 #tumblr:            username
-medium:            '@username'
+# medium:            '@username'
 #pinterest:         username
 #foursquare:        username
-steam:              username
+# steam:              username
 #dribbble:          username
 #youtube:           username
 #youtube-channel:   channel
-soundcloud:        username
+# soundcloud:        username
 #weibo:             username
 #flickr:            username
 #codepen:           username
