@@ -1,5 +1,5 @@
 ---
-title: paper_Review
+title: Dense Passage Retrieval for Open-Domain Question Answering
 excerpt: dense passage retrieval 논문
 
 categories:

@@ -3,9 +3,9 @@ title: 수식 최대화
 excerpt: 카카오 2020년 인턴십 문제 풀이
 
 categories:
-  - Algorithm
+  - Study
 tags:
-  - [Algorithm]
+  - [Algorithm,Study]
 
 toc: true
 toc_sticky: true
